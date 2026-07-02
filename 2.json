@@ -24,7 +24,7 @@
       "locale": "en-US",
       "geometry": {
         "x": 290, "y": 28, "width": 200, "height": 28,
-        "rotation": null,
+        "rotation": -7,
         "skew_x": null, "skew_y": null,
         "scale_x": 1, "scale_y": 1,
         "flip_horizontal": null, "flip_vertical": null,
@@ -33,7 +33,7 @@
         "baseline_y": 50
       },
       "typography": {
-        "font_family": "Georgia",
+        "font_family": "Poppins",
         "font_fallback_stack": ["Times New Roman", "serif"],
         "font_source": { "type": "local", "url": null },
         "font_variant": "Regular",
@@ -83,25 +83,24 @@
       "accessibility": { "aria_label": null, "aria_role": null, "aria_hidden": false, "tab_index": null },
       "notes": "Small serif italic label. Top-center area. White on blue. Appears to be a script or italic serif (Georgia-like)."
     },
-
     {
       "id": "text_02",
       "type": "text",
-      "content": "Good\nBye!",
+      "content": "Good",
       "language": "en",
       "locale": "en-US",
       "geometry": {
-        "x": 22, "y": 138, "width": 130, "height": 100,
-        "rotation": null,
+        "x": 30, "y": 138, "width": 110, "height": 50,
+        "rotation": -10,
         "skew_x": null, "skew_y": null,
         "scale_x": 1, "scale_y": 1,
         "flip_horizontal": null, "flip_vertical": null,
         "transform_origin": null,
         "z_index": 2,
-        "baseline_y": 228
+        "baseline_y": 175
       },
       "typography": {
-        "font_family": "Georgia",
+        "font_family": "Montserrat",
         "font_fallback_stack": ["Times New Roman", "serif"],
         "font_source": { "type": "local", "url": null },
         "font_variant": "Bold Italic",
@@ -134,154 +133,6 @@
         "ruby": null
       },
       "paragraph": {
-        "max_lines": 2, "overflow": "visible", "wrap_mode": "word",
-        "columns": null, "column_gap": null, "paragraph_spacing": null,
-        "orphans": null, "widows": null, "text_path": null
-      },
-      "appearance": {
-        "fill": { "type": "solid", "color": "#FFFFFF", "opacity": 1 },
-        "stroke": null, "shadows": null,
-        "opacity": 1, "blend_mode": "normal", "effects": null,
-        "antialiasing": "auto", "rendering_intent": "screen"
-      },
-      "text_decoration": { "underline": null, "strikethrough": null, "overline": null, "highlight": null },
-      "background": null,
-      "padding": null,
-      "inline_segments": null,
-      "accessibility": { "aria_label": "Good Bye!", "aria_role": null, "aria_hidden": false, "tab_index": null },
-      "notes": "Two-line serif italic. Left edge. Bold italic serif (Georgia/Times-style). Mixed case. White on blue background."
-    },
-
-    {
-      "id": "text_03",
-      "type": "text",
-      "content": "FONT\nCHANGER",
-      "language": "en",
-      "locale": "en-US",
-      "geometry": {
-        "x": 248, "y": 80, "width": 720, "height": 480,
-        "rotation": null,
-        "skew_x": null, "skew_y": null,
-        "scale_x": 1, "scale_y": 1,
-        "flip_horizontal": null, "flip_vertical": null,
-        "transform_origin": null,
-        "z_index": 3,
-        "baseline_y": 530
-      },
-      "typography": {
-        "font_family": "Arial",
-        "font_fallback_stack": ["Helvetica Neue", "Helvetica", "sans-serif"],
-        "font_source": { "type": "local", "url": null },
-        "font_variant": "Black",
-        "font_weight": 900,
-        "font_style": "normal",
-        "oblique_angle": null,
-        "font_size": 230,
-        "font_size_unit": "px",
-        "condensed": false,
-        "expanded": false,
-        "font_stretch": "normal",
-        "line_height": 0.95,
-        "line_height_unit": "multiplier",
-        "letter_spacing": -4,
-        "word_spacing": null,
-        "text_indent": null,
-        "text_transform": "uppercase",
-        "case": "uppercase",
-        "text_align": "left",
-        "vertical_align": "top",
-        "direction": "ltr",
-        "writing_mode": "horizontal-tb",
-        "unicode_bidi": null,
-        "baseline_shift": null,
-        "hanging_punctuation": null,
-        "hyphenation": false,
-        "font_features": {
-          "ligatures": "none",
-          "numerals": null,
-          "small_caps": false,
-          "swashes": false,
-          "stylistic_set": null,
-          "contextual_alts": false,
-          "fraction": false,
-          "ordinals": false,
-          "superscript": false,
-          "subscript": false,
-          "raw_feature_tags": null
-        },
-        "kerning": "auto",
-        "kerning_pairs": null,
-        "ruby": null
-      },
-      "paragraph": {
-        "max_lines": 2, "overflow": "visible", "wrap_mode": "none",
-        "columns": null, "column_gap": null, "paragraph_spacing": null,
-        "orphans": null, "widows": null, "text_path": null
-      },
-      "appearance": {
-        "fill": { "type": "solid", "color": "#FFFFFF", "opacity": 1 },
-        "stroke": null, "shadows": null,
-        "opacity": 1, "blend_mode": "normal", "effects": null,
-        "antialiasing": "auto", "rendering_intent": "screen"
-      },
-      "text_decoration": { "underline": null, "strikethrough": null, "overline": null, "highlight": null },
-      "background": null,
-      "padding": null,
-      "inline_segments": null,
-      "accessibility": { "aria_label": "FONT CHANGER", "aria_role": "heading", "aria_hidden": false, "tab_index": null },
-      "notes": "Hero display text. Dominant element. 2-line stacked. Ultra-black sans-serif, approx. Arial Black or similar grotesque. Very large. Slight negative tracking. White on purple. The 'C' in CHANGER appears to overlap with surrounding decorative elements."
-    },
-
-    {
-      "id": "text_04",
-      "type": "text",
-      "content": "Hello",
-      "language": "en",
-      "locale": "en-US",
-      "geometry": {
-        "x": 880, "y": 52, "width": 160, "height": 56,
-        "rotation": null,
-        "skew_x": null, "skew_y": null,
-        "scale_x": 1, "scale_y": 1,
-        "flip_horizontal": null, "flip_vertical": null,
-        "transform_origin": null,
-        "z_index": 4,
-        "baseline_y": 96
-      },
-      "typography": {
-        "font_family": "Arial",
-        "font_fallback_stack": ["Helvetica Neue", "sans-serif"],
-        "font_source": { "type": "local", "url": null },
-        "font_variant": "Black",
-        "font_weight": 900,
-        "font_style": "italic",
-        "oblique_angle": null,
-        "font_size": 48,
-        "font_size_unit": "px",
-        "condensed": false,
-        "expanded": false,
-        "font_stretch": "normal",
-        "line_height": 1.1,
-        "line_height_unit": "multiplier",
-        "letter_spacing": 0,
-        "word_spacing": null,
-        "text_indent": null,
-        "text_transform": "none",
-        "case": "mixed",
-        "text_align": "center",
-        "vertical_align": "middle",
-        "direction": "ltr",
-        "writing_mode": "horizontal-tb",
-        "unicode_bidi": null,
-        "baseline_shift": null,
-        "hanging_punctuation": null,
-        "hyphenation": false,
-        "font_features": null,
-        "kerning": "auto",
-        "kerning_pairs": null,
-        "ruby": null
-      },
-      "paragraph": {
         "max_lines": 1, "overflow": "visible", "wrap_mode": "none",
         "columns": null, "column_gap": null, "paragraph_spacing": null,
         "orphans": null, "widows": null, "text_path": null
@@ -293,45 +144,37 @@
         "antialiasing": "auto", "rendering_intent": "screen"
       },
       "text_decoration": { "underline": null, "strikethrough": null, "overline": null, "highlight": null },
-      "background": {
-        "fill": { "type": "solid", "color": "#5046E5", "opacity": 1 },
-        "shape": "rectangle",
-        "border_radius": null,
-        "padding": { "top": 6, "right": 10, "bottom": 6, "left": 10 },
-        "stroke": null,
-        "shadows": null
-      },
+      "background": null,
       "padding": null,
       "inline_segments": null,
-      "accessibility": { "aria_label": "Hello", "aria_role": null, "aria_hidden": false, "tab_index": null },
-      "notes": "Bold italic sans inside a distorted/warped grid sticker. Background is same purple as canvas. The containing sticker graphic (white grid on purple square with wave distortion) is a non-text shape element. Text appears centered within it."
+      "accessibility": { "aria_label": "Good", "aria_role": null, "aria_hidden": false, "tab_index": null },
+      "notes": "First line of the left-side serif italic text. Tilted counter-clockwise."
     },
-
     {
-      "id": "text_05",
+      "id": "text_03",
       "type": "text",
-      "content": "Thank\nYou!",
+      "content": "Bye!",
       "language": "en",
       "locale": "en-US",
       "geometry": {
-        "x": 1040, "y": 348, "width": 200, "height": 110,
-        "rotation": null,
+        "x": 55, "y": 186, "width": 110, "height": 50,
+        "rotation": -10,
         "skew_x": null, "skew_y": null,
         "scale_x": 1, "scale_y": 1,
         "flip_horizontal": null, "flip_vertical": null,
         "transform_origin": null,
-        "z_index": 5,
-        "baseline_y": 448
+        "z_index": 2,
+        "baseline_y": 223
       },
       "typography": {
-        "font_family": "Georgia",
+        "font_family": "Montserrat",
         "font_fallback_stack": ["Times New Roman", "serif"],
         "font_source": { "type": "local", "url": null },
         "font_variant": "Bold Italic",
         "font_weight": 700,
         "font_style": "italic",
         "oblique_angle": null,
-        "font_size": 48,
+        "font_size": 46,
         "font_size_unit": "px",
         "condensed": false,
         "expanded": false,
@@ -357,142 +200,6 @@
         "ruby": null
       },
       "paragraph": {
-        "max_lines": 2, "overflow": "visible", "wrap_mode": "word",
-        "columns": null, "column_gap": null, "paragraph_spacing": null,
-        "orphans": null, "widows": null, "text_path": null
-      },
-      "appearance": {
-        "fill": { "type": "solid", "color": "#FFFFFF", "opacity": 1 },
-        "stroke": null, "shadows": null,
-        "opacity": 1, "blend_mode": "normal", "effects": null,
-        "antialiasing": "auto", "rendering_intent": "screen"
-      },
-      "text_decoration": { "underline": null, "strikethrough": null, "overline": null, "highlight": null },
-      "background": null,
-      "padding": null,
-      "inline_segments": null,
-      "accessibility": { "aria_label": "Thank You!", "aria_role": null, "aria_hidden": false, "tab_index": null },
-      "notes": "Two-line serif bold italic. Right side. Same typeface style as 'Good Bye!' (text_02). White on blue."
-    },
-
-    {
-      "id": "text_06",
-      "type": "text",
-      "content": "HOLLA\nFELLAS",
-      "language": "en",
-      "locale": "en-US",
-      "geometry": {
-        "x": 22, "y": 510, "width": 260, "height": 130,
-        "rotation": null,
-        "skew_x": null, "skew_y": null,
-        "scale_x": 1, "scale_y": 1,
-        "flip_horizontal": null, "flip_vertical": null,
-        "transform_origin": null,
-        "z_index": 6,
-        "baseline_y": 630
-      },
-      "typography": {
-        "font_family": "Arial",
-        "font_fallback_stack": ["Helvetica Neue", "sans-serif"],
-        "font_source": { "type": "local", "url": null },
-        "font_variant": "Black",
-        "font_weight": 900,
-        "font_style": "normal",
-        "oblique_angle": null,
-        "font_size": 58,
-        "font_size_unit": "px",
-        "condensed": false,
-        "expanded": false,
-        "font_stretch": "normal",
-        "line_height": 1.0,
-        "line_height_unit": "multiplier",
-        "letter_spacing": 1,
-        "word_spacing": null,
-        "text_indent": null,
-        "text_transform": "uppercase",
-        "case": "uppercase",
-        "text_align": "left",
-        "vertical_align": "top",
-        "direction": "ltr",
-        "writing_mode": "horizontal-tb",
-        "unicode_bidi": null,
-        "baseline_shift": null,
-        "hanging_punctuation": null,
-        "hyphenation": false,
-        "font_features": null,
-        "kerning": "auto",
-        "kerning_pairs": null,
-        "ruby": null
-      },
-      "paragraph": {
-        "max_lines": 2, "overflow": "visible", "wrap_mode": "none",
-        "columns": null, "column_gap": null, "paragraph_spacing": null,
-        "orphans": null, "widows": null, "text_path": null
-      },
-      "appearance": {
-        "fill": { "type": "solid", "color": "#FFFFFF", "opacity": 1 },
-        "stroke": null, "shadows": null,
-        "opacity": 1, "blend_mode": "normal", "effects": null,
-        "antialiasing": "auto", "rendering_intent": "screen"
-      },
-      "text_decoration": { "underline": null, "strikethrough": null, "overline": null, "highlight": null },
-      "background": null,
-      "padding": null,
-      "inline_segments": null,
-      "accessibility": { "aria_label": "HOLLA FELLAS", "aria_role": null, "aria_hidden": false, "tab_index": null },
-      "notes": "Two-line all-caps sans-serif black. Bottom-left. Heavier/display weight. Slight positive tracking. White on blue."
-    },
-
-    {
-      "id": "text_07",
-      "type": "text",
-      "content": ".Cool",
-      "language": "en",
-      "locale": "en-US",
-      "geometry": {
-        "x": 620, "y": 580, "width": 280, "height": 100,
-        "rotation": null,
-        "skew_x": null, "skew_y": null,
-        "scale_x": 1, "scale_y": 1,
-        "flip_horizontal": null, "flip_vertical": null,
-        "transform_origin": null,
-        "z_index": 7,
-        "baseline_y": 668
-      },
-      "typography": {
-        "font_family": "Georgia",
-        "font_fallback_stack": ["Times New Roman", "serif"],
-        "font_source": { "type": "local", "url": null },
-        "font_variant": "Bold Italic",
-        "font_weight": 700,
-        "font_style": "italic",
-        "oblique_angle": null,
-        "font_size": 82,
-        "font_size_unit": "px",
-        "condensed": false,
-        "expanded": false,
-        "font_stretch": "normal",
-        "line_height": 1.0,
-        "line_height_unit": "multiplier",
-        "letter_spacing": 0,
-        "word_spacing": null,
-        "text_indent": null,
-        "text_transform": "none",
-        "case": "mixed",
-        "text_align": "left",
-        "vertical_align": "top",
-        "direction": "ltr",
-        "writing_mode": "horizontal-tb",
-        "unicode_bidi": null,
-        "baseline_shift": null,
-        "hanging_punctuation": null,
-        "hyphenation": false,
-        "font_features": null,
-        "kerning": "auto",
-        "kerning_pairs": null,
-        "ruby": null
-      },
-      "paragraph": {
         "max_lines": 1, "overflow": "visible", "wrap_mode": "none",
         "columns": null, "column_gap": null, "paragraph_spacing": null,
         "orphans": null, "widows": null, "text_path": null
@@ -507,10 +214,9 @@
       "background": null,
       "padding": null,
       "inline_segments": null,
-      "accessibility": { "aria_label": ".Cool", "aria_role": null, "aria_hidden": false, "tab_index": null },
-      "notes": "Large serif bold italic. Bottom-center. Includes literal leading dot. Mixed case (.Cool). Same serif italic family as 'Good Bye!' and 'Thank You!'. White on blue."
+      "accessibility": { "aria_label": "Bye!", "aria_role": null, "aria_hidden": false, "tab_index": null },
+      "notes": "Second line of the left-side serif italic text. Tilted counter-clockwise."
     }
-
   ],
 
   "metadata": {
@@ -520,17 +226,9 @@
       "Sans-serif Black/Heavy (Arial Black or similar grotesque) — FONT CHANGER, HOLLA FELLAS, Hello",
       "Serif Bold Italic (Georgia or similar) — Good Morning, Good Bye!, Thank You!, .Cool"
     ],
-    "total_text_elements": 7,
-    "color_palette": {
-      "background": "#5046E5",
-      "text_primary": "#FFFFFF"
-    },
-    "non_text_elements_excluded": [
-      "QR code inside circular frame",
-      "Barcode sticker (tape graphic)",
-      "Warped grid rectangle sticker containing 'Hello' text",
-      "Decorative x/cross dot grid pattern (left-center)"
-    ],
+    "total_text_elements": 1,
+    "color_palette": ["#5046E5", "#FFFFFF"],
+    "non_text_elements_excluded": [],
     "encoding_notes": [
       "Coordinates estimated from visual inspection of a 1280x720 canvas.",
       "Font families inferred from visual appearance — exact font names may differ.",

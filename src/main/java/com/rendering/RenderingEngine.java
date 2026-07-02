@@ -57,7 +57,7 @@ public class RenderingEngine {
 		this.mapper.setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
 		this.mapper.configure(MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS, true);
 		this.availableFonts = new HashSet<>(List.of(GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames()));
-		System.out.println("Available fonts: " + availableFonts.contains("Fredoka"));
+		System.out.println("Available fonts: " + availableFonts.contains("Noto Naskh Arabic"));
 	}
 
 	public void render(Path input, Path output) throws IOException {

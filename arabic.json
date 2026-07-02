@@ -1,0 +1,110 @@
+{
+  "_schema_version": "2.0.0",
+  "_schema_ref": "universal-text-element-schema",
+
+  "canvas": {
+    "width": 1280,
+    "height": 1280,
+    "unit": "px",
+    "color_mode": "full_color",
+    "background": {
+      "fill": { "type": "solid", "color": "#FFFFFF", "opacity": 1 }
+    },
+    "dpi": 72,
+    "coordinate_origin": "top-left"
+  },
+
+  "elements": [
+    {
+      "id": "text_01",
+      "type": "text",
+      "content": "\u201d \u0623\u064e\u064a\u0652\u0646\u064e\u0645\u064e\u0627 \u0632\u064e\u0631\u064e\u0639\u064e\u0643\u064e \u0627\u0644\u0644\u064e\u0651\u0647\u064f \u0627\u0632\u0652\u0647\u064e\u0631\u0652 \u201c",
+      "geometry": {
+        "x": 220, "y": 560, "width": 840, "height": 110,
+        "rotation": 0,
+        "skew_x": null, "skew_y": null,
+        "scale_x": 1, "scale_y": 1,
+        "flip_horizontal": false, "flip_vertical": false,
+        "transform_origin": "center",
+        "z_index": 1
+      },
+      "typography": {
+        "font_family": "Arial",
+        "font_weight": 500,
+        "font_style": "normal",
+        "font_size": 44,
+        "line_height": 1.2,
+        "letter_spacing": 1.0,
+        "text_align": "center",
+        "direction": "rtl",
+        "text_transform": "none",
+        "text_decoration": "none",
+        "text_normalization": "NFC",
+        "requires_shaping_engine": true
+      },
+      "appearance": {
+        "fill": { "type": "solid", "color": "#1A1A1A", "opacity": 1 },
+        "stroke": null, "shadows": null,
+        "opacity": 1, "blend_mode": "normal", "effects": null,
+        "antialiasing": "auto", "rendering_intent": "screen"
+      },
+      "accessibility": { "aria_label": "Arabic calligraphy quote with tashkeel", "aria_role": "text", "aria_hidden": false, "tab_index": null },
+      "notes": "Central Arabic script with full tashkeel (fatha, damma, sukun, shadda). Combining marks must be applied via GPOS mark-to-base/mark-to-mark positioning by a proper shaping engine (e.g. HarfBuzz) or native OS text rendering. Font must include tashkeel glyphs and GPOS tables — Arial and most generic sans fonts will drop or misplace these marks."
+    },
+    {
+      "id": "text_02",
+      "type": "text",
+      "content": "WHEREVER GOD PLANTS YOU, BLOOM.",
+      "geometry": {
+        "x": 260, "y": 680, "width": 760, "height": 40,
+        "rotation": 0,
+        "skew_x": null, "skew_y": null,
+        "scale_x": 1, "scale_y": 1,
+        "flip_horizontal": false, "flip_vertical": false,
+        "transform_origin": "center",
+        "z_index": 2
+      },
+      "typography": {
+        "font_family": "Sans-serif (e.g. Montserrat or similar geometric sans)",
+        "font_weight": 500,
+        "font_style": "normal",
+        "font_size": 16,
+        "line_height": 1.4,
+        "letter_spacing": 1.0,
+        "text_align": "center",
+        "direction": "ltr",
+        "text_transform": "uppercase",
+        "text_decoration": "none",
+        "text_normalization": "NFC",
+        "requires_shaping_engine": false
+      },
+      "appearance": {
+        "fill": { "type": "solid", "color": "#1A1A1A", "opacity": 1 },
+        "stroke": null, "shadows": null,
+        "opacity": 1, "blend_mode": "normal", "effects": null,
+        "antialiasing": "auto", "rendering_intent": "screen"
+      },
+      "accessibility": { "aria_label": "English translation subtitle", "aria_role": "text", "aria_hidden": false, "tab_index": null },
+      "notes": "Small uppercase sans-serif English translation positioned below the Arabic calligraphy."
+    }
+  ],
+
+  "metadata": {
+    "source_image_dimensions": { "width": 1280, "height": 1280, "unit": "px" },
+    "description": "Framed wall art print with a centered Arabic calligraphic quote (fully diacritized with tashkeel) in quotation marks, plus a small uppercase English translation beneath it.",
+    "font_families_identified": [
+      "Arabic Naskh-style font with tashkeel/GPOS support (Amiri, Noto Naskh Arabic, or Scheherazade New) — main Arabic text",
+      "Geometric Sans-serif, uppercase, letter-spaced — English subtitle"
+    ],
+    "total_text_elements": 2,
+    "color_palette": ["#FFFFFF", "#1A1A1A", "#B87333", "#E5E5E5"],
+    "non_text_elements_excluded": ["Wooden picture frame (copper/rose-gold tone)", "Wall surface background"],
+    "encoding_notes": [
+      "Arabic text_01 content is stored as a single NFC-normalized Unicode string; diacritics (tashkeel) are combining marks that immediately follow their base letter in logical order — do not store or position them as separate elements.",
+      "Rendering text_01 correctly requires a shaping engine (HarfBuzz or equivalent OS text stack) to perform Arabic contextual letter-joining and GPOS mark-to-base/mark-to-mark positioning for the diacritics. Glyph-by-glyph rendering without shaping will misplace or drop the shadda, fatha, damma, and sukun marks.",
+      "Font choice matters: the font must include tashkeel glyphs and GPOS positioning tables. Arial and most generic UI sans fonts lack this and will render broken or missing diacritics.",
+      "Coordinates estimated from visual inspection assuming a 1280x1280 square canvas.",
+      "Frame and wall are decorative/structural and excluded from the elements array per schema scope."
+    ]
+  }
+}
