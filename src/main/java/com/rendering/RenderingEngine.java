@@ -3,6 +3,7 @@ package com.rendering;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.rendering.model.BackgroundSpec;
 import com.rendering.model.CanvasSpec;
 import com.rendering.model.DividerElementSpec;
@@ -30,6 +31,7 @@ import java.awt.font.TextLayout;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
+import java.awt.geom.Path2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -55,10 +57,12 @@ public class RenderingEngine {
 		this.mapper.setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
 		this.mapper.configure(MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS, true);
 		this.availableFonts = new HashSet<>(List.of(GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames()));
+		System.out.println("Available fonts: " + availableFonts.contains("Fredoka"));
 	}
 
 	public void render(Path input, Path output) throws IOException {
-		RenderDocument document = mapper.readValue(Files.readString(input), RenderDocument.class);
+		String source = Files.readString(input);
+		RenderDocument document = parseDocument(source);
 		BufferedImage image = render(document);
 		Path parent = output.toAbsolutePath().getParent();
 		if (parent != null) {
@@ -83,6 +87,35 @@ public class RenderingEngine {
 			g2.dispose();
 		}
 		return image;
+	}
+
+	private RenderDocument parseDocument(String source) throws IOException {
+		String trimmed = source.trim();
+		if (trimmed.startsWith("[")) {
+			List<ElementSpec> elements = mapper.readValue(trimmed, new TypeReference<List<ElementSpec>>() {});
+			RenderDocument document = new RenderDocument();
+			document.elements = elements;
+			document.canvas = inferCanvas(elements);
+			return document;
+		}
+		return mapper.readValue(trimmed, RenderDocument.class);
+	}
+
+	private CanvasSpec inferCanvas(List<ElementSpec> elements) {
+		CanvasSpec canvas = new CanvasSpec();
+		int width = 1;
+		int height = 1;
+		for (ElementSpec element : elements) {
+			GeometrySpec geometry = element == null ? null : element.geometry;
+			if (geometry == null) {
+				continue;
+			}
+			width = Math.max(width, (int) Math.ceil(geometry.x + geometry.width));
+			height = Math.max(height, (int) Math.ceil(geometry.y + geometry.height));
+		}
+		canvas.width = width;
+		canvas.height = height;
+		return canvas;
 	}
 
 	private static int zIndex(ElementSpec element) {
@@ -131,9 +164,10 @@ public class RenderingEngine {
 				renderBackground(local, geometry, text.background);
 			}
 			String content = applyTextTransform(text.content, text.typography == null ? null : text.typography.textTransform);
-			Bidi bidi = new Bidi(content, Bidi.DIRECTION_DEFAULT_LEFT_TO_RIGHT);
-			TextRunStyle style = new TextRunStyle(text.typography, text.appearance == null ? null : text.appearance.fill);
-			AttributedCharacterIterator iterator = buildAttributedText(content, style, text.inlineSegments);
+			boolean rtl = isRtlDirection(text.typography == null ? null : text.typography.direction, content);
+			Bidi bidi = new Bidi(content, rtl ? Bidi.DIRECTION_RIGHT_TO_LEFT : Bidi.DIRECTION_LEFT_TO_RIGHT);
+			TextRunStyle style = new TextRunStyle(text.typography, text.appearance == null ? null : text.appearance.fill, rtl);
+			AttributedCharacterIterator iterator = buildAttributedText(content, style, text.inlineSegments, rtl);
 			FontRenderContext frc = local.getFontRenderContext();
 			TextLayout layout = new TextLayout(iterator, frc);
 			double drawX = text.typography != null && "center".equalsIgnoreCase(text.typography.textAlign)
@@ -150,6 +184,19 @@ public class RenderingEngine {
 		} finally {
 			local.dispose();
 		}
+	}
+
+	private boolean isRtlDirection(String direction, String content) {
+		if (direction != null) {
+			String normalized = direction.trim().toLowerCase(Locale.ROOT);
+			if ("rtl".equals(normalized) || "right-to-left".equals(normalized)) {
+				return true;
+			}
+			if ("ltr".equals(normalized) || "left-to-right".equals(normalized)) {
+				return false;
+			}
+		}
+		return content != null && Bidi.requiresBidi(content.toCharArray(), 0, content.length());
 	}
 
 	private void renderBackground(Graphics2D g2, GeometrySpec geometry, BackgroundSpec background) {
@@ -217,12 +264,22 @@ public class RenderingEngine {
 			local.setPaint(fill);
 			Shape shape = switch (shapeElement.shape == null ? "" : shapeElement.shape.toLowerCase(Locale.ROOT)) {
 				case "circle", "ellipse" -> new Ellipse2D.Double(0, 0, geometry.width, geometry.height);
+				case "triangle" -> triangleShape(geometry.width, geometry.height);
 				default -> new Rectangle2D.Double(0, 0, geometry.width, geometry.height);
 			};
 			local.fill(shape);
 		} finally {
 			local.dispose();
 		}
+	}
+
+	private Shape triangleShape(double width, double height) {
+		Path2D.Double triangle = new Path2D.Double();
+		triangle.moveTo(width / 2.0, 0.0);
+		triangle.lineTo(width, height);
+		triangle.lineTo(0.0, height);
+		triangle.closePath();
+		return triangle;
 	}
 
 	private void applyElementTransform(Graphics2D g2, GeometrySpec geometry) {
@@ -294,8 +351,9 @@ public class RenderingEngine {
 		return out.toString();
 	}
 
-	private AttributedCharacterIterator buildAttributedText(String content, TextRunStyle baseStyle, List<com.rendering.model.InlineSegmentSpec> inlineSegments) {
+	private AttributedCharacterIterator buildAttributedText(String content, TextRunStyle baseStyle, List<com.rendering.model.InlineSegmentSpec> inlineSegments, boolean rtl) {
 		AttributedString attributed = new AttributedString(content);
+		attributed.addAttribute(TextAttribute.RUN_DIRECTION, rtl ? TextAttribute.RUN_DIRECTION_RTL : TextAttribute.RUN_DIRECTION_LTR);
 		applyStyle(attributed, 0, content.length(), baseStyle);
 		if (inlineSegments != null) {
 			for (com.rendering.model.InlineSegmentSpec segment : inlineSegments) {
@@ -305,7 +363,7 @@ public class RenderingEngine {
 					continue;
 				}
 				String slice = segment.contentSlice == null ? content.substring(start, end) : segment.contentSlice;
-				TextRunStyle style = new TextRunStyle(segment.typography, segment.appearance == null ? null : segment.appearance.fill);
+				TextRunStyle style = new TextRunStyle(segment.typography, segment.appearance == null ? null : segment.appearance.fill, rtl);
 				attributed.addAttribute(TextAttribute.FONT, resolveFont(style), start, end);
 				attributed.addAttribute(TextAttribute.FOREGROUND, style.foreground(), start, end);
 				attributed.addAttribute(TextAttribute.TRACKING, style.tracking(), start, end);
@@ -323,12 +381,13 @@ public class RenderingEngine {
 		attributed.addAttribute(TextAttribute.FOREGROUND, style.foreground(), start, end);
 		attributed.addAttribute(TextAttribute.TRACKING, style.tracking(), start, end);
 		attributed.addAttribute(TextAttribute.KERNING, TextAttribute.KERNING_ON, start, end);
+		attributed.addAttribute(TextAttribute.LIGATURES, TextAttribute.LIGATURES_ON, start, end);
 	}
 
 	private Font resolveFont(TextRunStyle style) {
 		TypographySpec typography = style.typography;
 		String family = typography != null ? typography.fontFamily : null;
-		String resolvedFamily = chooseFontFamily(family, typography == null ? null : typography.fontFallbackStack);
+		String resolvedFamily = chooseFontFamily(family, typography == null ? null : typography.fontFallbackStack, style.rtl);
 		int awtStyle = Font.PLAIN;
 		if (typography != null && typography.fontStyle != null && typography.fontStyle.equalsIgnoreCase("oblique")) {
 			awtStyle = Font.ITALIC;
@@ -350,8 +409,9 @@ public class RenderingEngine {
 		return font;
 	}
 
-	private String chooseFontFamily(String family, List<String> fallbacks) {
+	private String chooseFontFamily(String family, List<String> fallbacks, boolean rtl) {
 		if (family != null && availableFonts.contains(family)) {
+			System.out.println("Using specified font family: " + family);
 			return family;
 		}
 		if (fallbacks != null) {
@@ -361,6 +421,7 @@ public class RenderingEngine {
 				}
 			}
 		}
+		System.out.println("Specified font family not available. Falling back to default sans-serif font.");
 		return Font.SANS_SERIF;
 	}
 
@@ -377,7 +438,7 @@ public class RenderingEngine {
 		return (int) Math.max(0, Math.min(255, Math.round(255 * value)));
 	}
 
-	private record TextRunStyle(TypographySpec typography, FillSpec fill) {
+	private record TextRunStyle(TypographySpec typography, FillSpec fill, boolean rtl) {
 		Color foreground() {
 			return fill == null ? Color.BLACK : new Color(colorFromHex(fill.color).getRed(), colorFromHex(fill.color).getGreen(), colorFromHex(fill.color).getBlue(), alpha(fill.opacity));
 		}
